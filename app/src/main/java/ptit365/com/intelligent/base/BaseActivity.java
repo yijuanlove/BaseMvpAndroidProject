@@ -9,6 +9,8 @@ import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
+import ptit365.com.intelligent.statusbar.ImmersiveStatusBarCompat;
+
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView{
     protected String TAG = this.getClass().getSimpleName();
     protected T mPresenter;
@@ -18,6 +20,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onCreate(savedInstanceState);
         setContentView(findLayoutId());
         initView();
+
+//        ImmersiveStatusBarCompat.setStatusBarColor(getWindow(),false,getResources().getColor(),true);
     }
 
     protected abstract int findLayoutId();
@@ -43,4 +47,5 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         return AutoDispose.autoDisposable(AndroidLifecycleScopeProvider
                 .from(this, Lifecycle.Event.ON_DESTROY));
     }
+
 }
